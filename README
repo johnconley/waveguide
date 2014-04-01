@@ -1,0 +1,4 @@
+change for loop of animmirrorwave and animscattwave to call not full
+wave plots and to set axis
+
+change resplotmirror to accept minimum k and kappa
