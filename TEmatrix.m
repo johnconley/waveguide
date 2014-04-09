@@ -1,12 +1,12 @@
 function A = TEmatrix(n0, n1, n2, a, k, kappa)
-% A - matrix for the TE wave system
+% A - matrix for the TE wave system of a three-layer waveguide
 % 
-% n0 - 
-% n1 - 
-% n2 - 
-% a - 
-% k - wavenumber
-% kappa - frequency in the x direction
+% n0 - Refractive index of first layer
+% n1 - Refractive index of second layer
+% n2 - Refractive index of third layer
+% a - Thickness of second layer
+% k - Overall wavenumber
+% kappa - Wavenumber in the x direction
 %
 % Conley April 2014
 
@@ -21,7 +21,7 @@ a2 = sqrt(n2^2*k^2-kappa^2);
 % kappa roughly equals n1*k
 if (abs(kappa - n1*k) <= tol)
     row1 = [1, -1, 0, 0];
-    row2 = [-1i*a0, 0, 0, 0];
+    row2 = [-1i*a0, 0, -1, 0];
     row3 = [0, 1, a, -exp(1i*a2*a)];
     row4 = [0, 0, 1, -1i*a2*exp(1i*a2*a)];
 else

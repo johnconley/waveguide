@@ -1,0 +1,31 @@
+function c = currentAcrossSpectrum(n0,n2,d)
+% construct list of tuples of wavelength, complex refractive index
+% iterate through tuples, calculate currentAtWavelength at each and
+% multiply by width of interval. Sum all of these
+% So essentially we're only varying d. We can create a graph of current v.
+% wavelength.
+
+refIxReal = csvread('si_ref_ix_real.txt');
+extCoef = csvread('si_ref_ix_imag.txt');
+numVals = size(refIxReal, 1);
+refractiveIndexes = zeros([numVals, 2]);
+for i=1:numVals
+    refractiveIndexes(i, 1) = refIxReal(1);
+    refractiveIndexes(i, 2) = refIxReal(2) + 1i*extCoef(2);
+end
+
+prevLambda = refractiveIndexes(1,1);
+c = 0;
+for list = refractiveIndexes
+    disp('new wavelength------------------------');
+    disp(list(1));
+    disp(list(2))
+    lambda = list(1);
+    n1 = list(2);
+    interval = lambda - prevLambda;
+    current = currentAtWavelength(lambda, n0, n1, n2, d);
+    disp(interval);
+    disp(current);
+    c = c + interval * current;
+end
+end
