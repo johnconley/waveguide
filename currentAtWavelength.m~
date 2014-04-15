@@ -16,14 +16,13 @@ function c = currentAtWavelength(k, n0, n1, n2, d)
 
 % do we want to sweep over angles???
 % thetas = linspace(pi/6, pi/3, 100);
-% c = 0;
-% for theta = thetas
-% 	c = c + currentAtAngle(theta);
-% end
-c = currentAtAngle(pi/4);
+c = 0;
+for theta = thetas
+	c = c + currentAtAngle(theta);
+end
 
 function c = currentAtAngle(theta)
-kappa = k * sin(theta);
+kappa = k * asin(theta);
 
 A = TEmatrix(n0, n1, n2, d, k, kappa);
 b = [-1;-sqrt(n0^2*k^2-kappa^2);0;0];

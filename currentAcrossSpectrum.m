@@ -24,7 +24,14 @@ for i = 1:numVals
     refractiveIndexes(i, 2) = refIxReal(i, 2) + 1i*extCoef(i, 2);
 end
 
+
+
 % estimate integral of current generated over spectrum
+% x = refractiveIndexes(:, 1);
+% y = refractiveIndexes(:, 2);
+% refIxFnc = spline(x, y);
+% lambdas = linspace(x(1), x(numVals), 10);
+% do gaussian quadrature over ^
 prevLambda = refractiveIndexes(1,1);
 c = 0;
 for i = 1:numVals

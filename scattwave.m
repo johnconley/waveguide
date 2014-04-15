@@ -1,12 +1,14 @@
 function scattwave(type, n0, n1, n2, a, k, kappa, t)
 % scattwave - plots
 %
+% type - 'te' or 'tm'
 % n0 - 
 % n1 - 
 % n2 - 
 % a - 
 % k - wavenumber
 % kappa - frequency in the x direction
+% t - 
 %
 % Conley October 2013
 
