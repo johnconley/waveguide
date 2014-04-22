@@ -14,11 +14,11 @@ function scattwave(type, n0, n1, n2, a, k, kappa, t)
 
 if (strcmp(type, 'te') == 1) %% type == 'te'
     A = TEmatrix(n0, n1, n2, a, k, kappa);
-    b = [-1;-i*conj(sqrt(n0^2*k^2-kappa^2));0;0];
+    b = [-1;-1i*conj(sqrt(n0^2*k^2-kappa^2));0;0];
     x = A\b;
 else %% type == 'tm'
     A = TMmatrix(n0, n1, n2, a, k, kappa);
-    b = [-1;-i*conj(sqrt(n0^2*k^2-kappa^2))/(n0^2);0;0];
+    b = [-1;-1i*conj(sqrt(n0^2*k^2-kappa^2))/(n0^2);0;0];
     x = A\b;
 end
 

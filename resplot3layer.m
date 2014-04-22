@@ -24,7 +24,7 @@ if (strcmp(type, 'te') == 1) %% type == 'te'
         j = 1;
         for kappa = kappas
             A = TEmatrix(n0, n1, n2, a, k, kappa);
-            b=[-1;-i*conj(sqrt(n0^2*k^2-kappa^2));0;0];
+            b=[-1;-1i*conj(sqrt(n0^2*k^2-kappa^2));0;0];
             X=A\b;
             x(i,j) = norm(X);
             j = j + 1;
@@ -38,7 +38,7 @@ else %% type == 'tm'
         j = 1;
         for kappa = kappas
             A = TMmatrix(n0, n1, n2, a, k, kappa);
-            b=[-1;-i*conj(sqrt(n0^2*k^2-kappa^2))/(n0^2);0;0];
+            b=[-1;-1i*conj(sqrt(n0^2*k^2-kappa^2))/(n0^2);0;0];
             X=A\b;
             x(i,j) = norm(X);
             if ((abs(kappa - n1*k) < .1) &&(norm(X) > 1))

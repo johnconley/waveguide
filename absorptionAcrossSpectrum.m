@@ -1,4 +1,4 @@
-function c = currentAcrossSpectrum(n0, n2, d)
+function c = absorptionAcrossSpectrum(type, n0, n2, d)
 % construct list of tuples of wavelength, complex refractive index
 % iterate through tuples, calculate currentAtWavelength at each and
 % multiply by width of interval. Sum all of these
@@ -24,28 +24,30 @@ for i = 1:numVals
     refractiveIndexes(i, 2) = refIxReal(i, 2) + 1i*extCoef(i, 2);
 end
 
-
-
 % estimate integral of current generated over spectrum
-% x = refractiveIndexes(:, 1);
-% y = refractiveIndexes(:, 2);
-% refIxFnc = spline(x, y);
-% lambdas = linspace(x(1), x(numVals), 10);
-% do gaussian quadrature over ^
-prevLambda = refractiveIndexes(1,1);
+lambdas = refractiveIndexes(:, 1);
+y = refractiveIndexes(:, 2);
+refIxFnc = spline(lambdas, y);
+f = @(lambda) ppval(refIxFnc, lambda); % takes wavelength in microns, returns complex n
+
+% gaussian quadrature
+numNodes = 10;
+[lambdas, weights] = quadr.gauss(numNodes);
+lambdas = (3*lambdas+5)/8;
+weights = 3*weights/8;
 c = 0;
-for i = 1:numVals
-    lambda = refractiveIndexes(i, 1);
-    k = 2*pi/lambda;
-    
-    n1 = refractiveIndexes(i, 2);
-    nr = real(n1);
-    ni = imag(n1);
-    
-    interval = lambda - prevLambda;
-    current = currentAtWavelength(k, n0, n1, n2, d);
-    c = c + interval * current * k * nr * ni;
-    
-    prevLambda = lambda;
-end
+% for j = 1:numNodes
+%     w = weights(j);
+%     lambda = lambdas(j);
+%     k = 2*pi/lambda;
+%     n1 = f(lambda);
+%     
+%     cj = currentAtWavelength(type, k, n0, n1, n2, d) * k * real(n1) * imag(n1);
+%     c = c + w * cj;
+% end
+
+lambda = .35;
+k = 2*pi/lambda;
+n1 = f(lambda);
+c = absorptionAtWavelength(type,k,n0,n1,n2,d);
 end
