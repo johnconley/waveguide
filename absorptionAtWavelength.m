@@ -1,11 +1,10 @@
-function c = absorptionAtWavelength(type, k, n0, n1, n2, d)
-% c - current generated in a three-layer waveguide with incident wave
-% testing with lambda=.5, n0=6, n1=4.277+.066i, n2=6, d=.05
+function a = absorptionAtWavelength(type, lambda, n0, n2, d, f)
+% a - absorption in a three-layer waveguide with incident wave
 % currently this only works for TE three-layer waveguide with incident wave
 %
-% k - Wavenumber in radians/micron
+% type - 'te' or 'tm'
+% lambda - Wavelength in microns
 % n0 - Refractive index of layer 0 (assumed to be real)
-% n1 - Complex refractive index of the active layer at wavelength 2*pi/k
 % n2 - Refractive index of layer 2 (assumed to be real)
 % d - Thickness of the active layer in microns
 %
@@ -23,9 +22,12 @@ function c = absorptionAtWavelength(type, k, n0, n1, n2, d)
 % for theta = thetas
 % 	c = max(c, currentAtAngle(theta));
 % end
-c = absorptionAtAngle(pi/4);
 
-function c = absorptionAtAngle(theta)
+k = 2*pi/lambda; % wavenumber in radians/micron
+n1 = f(lambda); % complex refractive index of silicon at wavelength lambda
+a = absorptionAtAngle(pi/4);
+
+function a = absorptionAtAngle(theta)
 kappa = k * sin(theta);
 
 if (strcmp(type, 'te') == 1) %% type == 'te'
@@ -44,7 +46,7 @@ c4 = coeffs(4);
 inFlux = n0*k;
 outFlux = n0*k*abs(c1)^2+n2*k*abs(c4)^2;
 
-c = (inFlux - outFlux) / inFlux; % this is absorption, must change to current
+a = (inFlux - outFlux) / inFlux; % this is absorption, must change to current
 end % end currentAtAngle
 end % end currentAtWavelength
 

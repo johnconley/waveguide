@@ -1,15 +1,15 @@
-function exploreSpectrum(min, max)
+function exploreSpectrum(lambda, minThickness, maxThickness)
 n=100;
-ds=linspace(min, max, n);
-n0=6;
-n2=6;
+ds=linspace(minThickness, maxThickness, n);
+n0=6; % refractive index in 1st layer (w/ incident wave)
+n2=6; % refractive index in 3rd layer
 
-te = @(d) absorptionAcrossSpectrum('te', n0, n2, d);
-%tm = @(d) absorptionAcrossSpectrum('tm', n0, n2, d);
+te = @(d) absorptionAtWavelength('te', lambda, n0, n2, d, refIxFnc);
+% tm = @(d) absorptionAtWavelength('te', lambda, n0, n2, d, refIxFnc);
 
 TEabsorption = arrayfun(te, ds);
-% TMcurrents = arrayfun(tm, ds);
-absorption = TEabsorption;% + TMcurrents;
+% TMabsorption = arrayfun(tm, ds);
+absorption = TEabsorption;% + TMabsorption;
 
 plot(ds, absorption);
 end
