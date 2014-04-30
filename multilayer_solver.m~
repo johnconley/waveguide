@@ -15,7 +15,7 @@ function [absorption, coeffs] = multilayer_solver(polarization, mirror, k, kappa
 
 
 % check input: k != 0, length(ns) = length(ds)+1, ds(j) > 0,
-% ns(j) != 0 (except for last one), at least one layer
+% ns(j) != 0 (except for last one)
 
 i = 1i;
 m = length(ds); % number of layers (excluding freespace and final infinite layer)
@@ -76,20 +76,14 @@ for layer = 1:m
     aa = sqrt((nn*k)^2 - kappa^2);
     
     A(r,c) = exp(i*a*d);
+    A(r+1,c) = i*a*exp(i*a*d);
     A(r,c+1) = exp(-i*a*d);
-    
+    A(r+1,c+1) = -i*a*exp(-i*a*d);
+    A(r,c+2) = -exp(i*aa*d);
+    A(r+1,c+2) = -i*aa*exp(i*aa*d);
     if (layer < m)
-        A(r,c+2) = -exp(i*aa*d);
         A(r,c+3) = -exp(-i*aa*d);
-        A(r+1,c) = i*a*exp(i*a*d);
-        A(r+1,c+1) = -i*a*exp(-i*a*d);
-        A(r+1,c+2) = -i*aa*exp(i*aa*d);
         A(r+1,c+3) = i*aa*exp(-i*aa*d);
-    else
-        if ~mirror
-            A(r,c+2) = -exp(i*aa*d);
-            A(r+1,c+2) = -i*aa*exp(i*aa*d);
-        end
     end
     
     % won't work if mirror
@@ -114,13 +108,13 @@ end
 coeffs = A\b;
 
 influx = n0*k;
-freespaceOutflux = n0*k*abs(coeffs(1))^2;
+freeSpaceOutflux = n0*k*abs(coeffs(1))^2;
 if mirror
-    transmittedOutflux = 0;
+    
 else
     transmittedOutflux = nf*k*abs(coeffs(size))^2;
 end
-outflux = freespaceOutflux + transmittedOutflux;
+outflux =  + 
 
 absorption = (influx - outflux) / influx;
 
