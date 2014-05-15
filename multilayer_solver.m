@@ -2,7 +2,7 @@ function [absorption, coeffs] = multilayer_solver(polarization, mirror, k, kappa
 % multilayer_solver - computes the absorption and wave equation
 % coefficients for an arbitrary layer waveguide
 %
-% polarization - 'te' for transverse electric and 'tm' for trasnverse
+% polarization - 'te' for transverse electric and 'tm' for transverse
 % magnetic
 % mirror - true if layer n+1 is a perfect mirror, false otherwise
 % k - overall wavenumber in freespace
@@ -15,14 +15,11 @@ function [absorption, coeffs] = multilayer_solver(polarization, mirror, k, kappa
 
 
 % check input: k != 0, length(ns) = length(ds)+1, ds(j) > 0,
-% ns(j) != 0 (except for last one), at least one layer
+% ns(j) != 0 (except for last one), at least one layer, kappa < k (?)
 
 i = 1i;
 m = length(ds); % number of layers (excluding freespace and final infinite layer)
 size = 2*m + 2;
-if mirror
-    size = size - 1;
-end
 
 if (strcmp(polarization, 'tm') == 1)
     tm = true;
@@ -61,6 +58,10 @@ if tm
     A(2,3) = A(2,3)/n1^2;
 end
 
+if m == 0 % correct for 0-layer (1 interface)
+    A = A(:,1:2);
+end
+
 % what happens if kappa roughly equals n*k?
 for layer = 1:m
     r = 2*layer + 1;
@@ -76,20 +77,14 @@ for layer = 1:m
     aa = sqrt((nn*k)^2 - kappa^2);
     
     A(r,c) = exp(i*a*d);
+    A(r+1,c) = i*a*exp(i*a*d);
     A(r,c+1) = exp(-i*a*d);
-    
+    A(r+1,c+1) = -i*a*exp(-i*a*d);
+    A(r,c+2) = -exp(i*aa*d);
+    A(r+1,c+2) = -i*aa*exp(i*aa*d);
     if (layer < m)
-        A(r,c+2) = -exp(i*aa*d);
         A(r,c+3) = -exp(-i*aa*d);
-        A(r+1,c) = i*a*exp(i*a*d);
-        A(r+1,c+1) = -i*a*exp(-i*a*d);
-        A(r+1,c+2) = -i*aa*exp(i*aa*d);
         A(r+1,c+3) = i*aa*exp(-i*aa*d);
-    else
-        if ~mirror
-            A(r,c+2) = -exp(i*aa*d);
-            A(r+1,c+2) = -i*aa*exp(i*aa*d);
-        end
     end
     
     % won't work if mirror
@@ -104,6 +99,11 @@ for layer = 1:m
     
 end
 
+if mirror
+    size = size - 1;
+    A = A(1:size,1:size);
+end
+
 b = zeros(size, 1);
 b(1) = -1;
 b(2) = -i*conj(a0);
@@ -113,15 +113,27 @@ end
 
 coeffs = A\b;
 
-influx = n0*k;
-freespaceOutflux = n0*k*abs(coeffs(1))^2;
+kyi = a0; % k_y incident
+if tm
+    kyi = kyi/n0^2;
+end
+influx = kyi;
+if abs(kappa) > k % light does not enter waveguide
+    influx=0;
+end
+
+freespaceOutflux = kyi*abs(coeffs(1))^2;
+
 if mirror
     transmittedOutflux = 0;
 else
-    transmittedOutflux = nf*k*abs(coeffs(size))^2;
+    if size == 2, kyo = a1; else kyo = aa; end % kyo is k_y out in final layer
+    if real(kyo) == 0, kyo = 0; end % kills total internal reflection
+    if tm, kyo= kyo/nf^2; end
+    transmittedOutflux = kyo*abs(coeffs(size))^2;
 end
-outflux = freespaceOutflux + transmittedOutflux;
 
+outflux = freespaceOutflux + transmittedOutflux;
 absorption = (influx - outflux) / influx;
 
 end

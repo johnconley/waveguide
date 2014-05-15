@@ -41,13 +41,9 @@ for j = 1:numNodes
     ps(j) = photons;
     
     if (lambda < 1.7726) % cutoff of .7 eV to kick up electron
-        n1 = f(lambda);
-        ds = [d];
-        ns = [n1, n2];
-        [teAbsorption, ~] = multilayer_solver(te, false, 2*pi/lambda, 0, ds, ns);
-        [tmAbsorption, ~] = multilayer_solver(tm, false, 2*pi/lambda, 0, ds, ns);
-%         teAbsorption = absorptionAtWavelength(te, lambda, n0, n2, d, f);
-%         tmAbsorption = absorptionAtWavelength(tm, lambda, n0, n2, d, f);
+        [teAbsorption, ~] = multilayer_solver(te,
+        teAbsorption = absorptionAtWavelength(te, lambda, n0, n2, d, f);
+        tmAbsorption = absorptionAtWavelength(tm, lambda, n0, n2, d, f);
         absorption = (teAbsorption + tmAbsorption)/2;
 %         absorption = 1;
         as(j) = absorption;
