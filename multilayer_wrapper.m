@@ -13,7 +13,7 @@ function a = multilayer_wrapper(m, mirror, ix, ds, ns)
 % verify number of layers with m?
 
 % conductive oxide layers (indium tin oxide, or ITO)
-% see https://spie.org/x91028.xml,
+% see http://spie.org/x91028.xml?ArticleID=x91028,
 % http://refractiveindex.info/legacy/?group=CRYSTALS&material=ITO,
 % http://en.wikipedia.org/wiki/Transparent_conducting_film
 d_ITO = .1;

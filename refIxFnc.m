@@ -18,6 +18,17 @@ end
 
 lambdas = refractiveIndexes(:, 1);
 y = refractiveIndexes(:, 2);
+
 refIxFnc = spline(lambdas, y);
-f = @(lambda) ppval(refIxFnc, lambda); % takes wavelength in microns, returns complex n
+
+    function n = fun(refIxFnc, lambda)
+        n = ppval(refIxFnc, lambda);
+        nr = real(n);
+        ni = abs(imag(n));
+        n = nr + 1i*ni;
+    end
+
+f = @(lambda) fun(refIxFnc, lambda);
+
+% f = @(lambda) ppval(refIxFnc, lambda); % takes wavelength in microns, returns complex n
 end
