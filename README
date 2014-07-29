@@ -29,3 +29,9 @@ mirrorgui: GUI to explore resplotmirror to see animmirrorwave for various values
 explormap2d:
 dielzguide:
 GUI_18:
+
+
+optimization directory contains code to optimize absorption over the solar spectrum
+
+visualization directory contains code to explore the resonances across angle and frequency of
+incident light and explore how the waves travel through the waveguide
