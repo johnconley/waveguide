@@ -1,4 +1,4 @@
-function multilayer_gui
+function multilayerGui
 %
 % Conley May 2014
 % Modeled off

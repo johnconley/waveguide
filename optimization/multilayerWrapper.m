@@ -1,4 +1,4 @@
-function a = multilayer_wrapper(m, mirror, ix, ds, ns)
+function a = multilayerWrapper(m, mirror, ix, ds, ns)
 % wrapper function to optimize over thickness and refractive indices of an
 % m-layer waveguide
 % returns a, the proportion of incident photons absorbed (nonzero)
@@ -54,8 +54,8 @@ for j = 1:numNodes
         k = 2*pi/lambda;
         kappa = 0; % normal incidence
         
-        [teAbsorption, ~] = multilayer_solver(te, mirror, k, kappa, ds, ns);
-        [tmAbsorption, ~] = multilayer_solver(tm, mirror, k, kappa, ds, ns);
+        [teAbsorption, ~] = multilayerSolver(te, mirror, k, kappa, ds, ns);
+        [tmAbsorption, ~] = multilayerSolver(tm, mirror, k, kappa, ds, ns);
         absorption = (teAbsorption + tmAbsorption)/2;
         as(j) = absorption;
         

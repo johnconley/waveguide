@@ -4,7 +4,7 @@ function f = irradianceFnc
 %
 % Conley April 2014
 
-irrData = csvread('spectral_irrad.txt');
+irrData = csvread('spectralIrradiance.txt');
 
 lambdas = irrData(:, 1) / 1000; % convert input from nm to micron
 i = irrData(:, 2) * 1000; % convert from W/m^2/nm to W/m^2/micron

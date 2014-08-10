@@ -5,8 +5,8 @@ function f = refIxFnc
 % Conley April 2014
 
 % read data from files
-refIxReal = csvread('si_ref_ix_real.txt');
-extCoef = csvread('si_ref_ix_imag.txt');
+refIxReal = csvread('SiRefractiveIndexReal.txt');
+extCoef = csvread('SiRefractiveIndexImag.txt');
 numVals = size(refIxReal, 1);
 
 % zip together real and imaginary parts of refractive index
