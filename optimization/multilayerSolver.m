@@ -64,10 +64,10 @@ end
 
 % what happens if kappa roughly equals n*k?
 for layer = 1:m
-    r = 2*layer + 1;
-    c = 2*layer;
+    r = 2*layer + 1; % row index
+    c = 2*layer; % column index
     
-    d = ds(layer);
+    d = ds(layer); % thickness of layer
     
     % current layer
     n = ns(layer);
