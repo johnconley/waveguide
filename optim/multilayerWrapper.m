@@ -54,13 +54,13 @@ for j = 1:numNodes
         k = 2*pi/lambda;
         kappa = 0; % normal incidence
         
-        [teAbsorption, ~] = multilayerSolver(te, mirror, k, kappa, ds, ns);
-        [tmAbsorption, ~] = multilayerSolver(tm, mirror, k, kappa, ds, ns);
-        absorption = (teAbsorption + tmAbsorption)/2;
-        as(j) = absorption;
+        [teAbsorbance, ~] = multilayerSolver(te, mirror, k, kappa, ds, ns);
+        [tmAbsorbance, ~] = multilayerSolver(tm, mirror, k, kappa, ds, ns);
+        absorbance = (teAbsorbance + tmAbsorbance)/2;
+        as(j) = absorbance;
         
         incomingPhotons = incomingPhotons + photons * w;
-        photonsAbsorbed = photonsAbsorbed + (absorption * photons) * w;
+        photonsAbsorbed = photonsAbsorbed + (absorbance * photons) * w;
     end
 end
 

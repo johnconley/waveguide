@@ -1,5 +1,5 @@
-function [absorption, coeffs] = multilayerSolver(polarization, mirror, k, kappa, ds, ns)
-% multilayerSolver - computes the absorption and wave equation
+function [absorbance, coeffs] = multilayerSolver(polarization, mirror, k, kappa, ds, ns)
+% multilayerSolver - computes the absorbance and wave equation
 % coefficients for an arbitrary layer waveguide
 %
 % polarization - 'te' for transverse electric and 'tm' for transverse
@@ -134,6 +134,6 @@ else
 end
 
 outflux = freespaceOutflux + transmittedOutflux;
-absorption = (influx - outflux) / influx;
+absorbance = (influx - outflux) / influx;
 
 end
