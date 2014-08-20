@@ -1,4 +1,4 @@
-function a = multilayerWrapper(m, mirror, ix, ds, ns)
+function a = totalSpectralAbsorbance(m, mirror, ix, ds, ns)
 % wrapper function to optimize over thickness and refractive indices of an
 % m-layer waveguide
 % returns a, the proportion of incident photons absorbed (nonzero)
