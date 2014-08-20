@@ -1,4 +1,18 @@
 function mirrorwave2d(type, n0, n1, n2, d1, d2, k, kappa, t)
+% mirrorwave2d - plots mirror-backed waveguide with incident light in two
+% dimensions
+% 
+% type - Transverse electric (TE) or transverse magnetic (TM)
+% n0 - Refractive index of first layer
+% n1 - Refractive index of second layer
+% n2 - Refractive index of third layer
+% d1 - Thickness of second layer
+% d2 - Thickness of third layer
+% k - Overall wavenumber
+% kappa - Wavenumber in the x direction
+% t - Time
+%
+% Conley October 2013
 
 if (strcmp(type, 'te') == 1) %% type == 'te'
     A = mirrorTE(n0, n1, n2, d1, d2, k, kappa);

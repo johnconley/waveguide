@@ -1,12 +1,15 @@
 function scattwave2d(type, n0, n1, n2, a, k, kappa, t)
-% fullscattwave - plots
+% scattwave2d - plots three-layer waveguide with incident light in two
+% dimensions
 %
+% type - 'te' or 'tm'
 % n0 - Refractive index of first layer
 % n1 - Refractive index of second layer
 % n2 - Refractive index of third layer
 % a - Thickness of second layer
 % k - Overall wavenumber
 % kappa - Wavenumber in the x direction
+% t - Time
 %
 % Conley April 2014
 

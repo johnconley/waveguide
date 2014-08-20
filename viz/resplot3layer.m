@@ -1,13 +1,16 @@
 function resplot3layer(type, n0, n1, n2, a, kappa_min, kappa_max, k_min, k_max,res)
-% resplot3layer - creates a plot of 
+% resplot3layer - plots resonances of three-layer waveguide with incident
+% light
 %
 % type - Transverse electric (TE) or transverse magnetic (TM)
 % n0 - Refractive index of first layer
 % n1 - Refractive index of second layer
 % n2 - Refractive index of third layer
 % a - Thickness of second layer
-% kappa_max - Maximum value of kappa (wavenumber in x direction) to plot
-% k_max - Maximum value of k (overall wavenumber) to plot
+% kappa-Min - Minimum value of kappa (wavenumber in x direction)
+% kappa_max - Maximum value of kappa
+% k_min - Minimum value of k (overall wavenumber)
+% k_max - Maximum value of k
 %
 % Conley April 2014
 

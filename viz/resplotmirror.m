@@ -1,14 +1,15 @@
 function resplotmirror(type, n0, n1, n2, d1, d2, kappa_max, k_max)
-% resplotmirror - creates a plot of 
-%
-% type - te or tm
-% n0 - 
-% n1 - 
-% n2 - 
-% d1 - 
-% d2 - 
-% kappa_max - max value of kappa to plot
-% k_max - max value of k to plot
+% resplotmirror - plots resonances of mirror-backed waveguide with incident
+% light
+% 
+% type - Transverse electric (TE) or transverse magnetic (TM)
+% n0 - Refractive index of first layer
+% n1 - Refractive index of second layer
+% n2 - Refractive index of third layer
+% d1 - Thickness of second layer
+% d2 - Thickness of third layer
+% kappa_max - Maximum value of kappa (wavenumber in x direction)
+% k_max - Maximum value of k (overall wavenumber)
 %
 % Conley October 2013
 

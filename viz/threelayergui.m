@@ -8,8 +8,6 @@ function threelayergui(type, n0, n1, n2, a, kappa_min, kappa_max, k_min, k_max)
 % http://www.mathworks.com/matlabcentral/fileexchange/24861-41-complete-gui-examples/content/GUI_27.m
 
 t = 10^(-9);
-kappa_tol = abs(kappa_max - kappa_min)/25;
-k_tol = abs(k_max - k_min)/25;
 res = 500;
 
 S.fh = figure('Visible', 'on',...
@@ -47,13 +45,8 @@ set(S.fh, 'windowbuttondownfcn', {@buttondown,S});
 set(S.fh, 'windowbuttonupfcn', {@buttonup,S});
 set(S.fh, 'windowbuttonmotionfcn', {@buttonmotion,S});
 
-% while (1)
-%     disp(1);
-% end
-
 % callbacks
     function buttondown(varargin)
-%         disp('button down');
         S = varargin{3};  % Get the structure.
         F = get(S.fh,'currentpoint');  % The current point w.r.t the figure.
         % Figure out of the current point is over the axes or not -> logicals.
@@ -61,23 +54,15 @@ set(S.fh, 'windowbuttonmotionfcn', {@buttonmotion,S});
         tf2 = S.axpos(2) <= F(2) && F(2) <= S.axpos(2) + S.axpos(4);
         
         if tf1 && tf2
-%             disp('should set');
             % Calculate the current point w.r.t. the axes.
             kappa =  S.xlim(1) + (F(1)-S.axpos(1)).*(S.dx/S.axpos(3));
             k =  S.xlim(1) + (F(2)-S.axpos(2)).*(S.dy/S.axpos(4));
             S.kappa = kappa;
             S.k = k;
-%             disp('init kappa');
-%             disp(S.kappa);
-%             disp('init k');
-%             disp(S.k);
-%             setappdata(S, 'kappa', kappa);
-%             setappdata(S, 'k', k);
         end
     end
         
     function buttonup(varargin)
-%         disp('button up');
         S = varargin{3};  % Get the structure.
         F = get(S.fh,'currentpoint');  % The current point w.r.t the figure.
         % Figure out of the current point is over the axes or not -> logicals.
@@ -88,34 +73,7 @@ set(S.fh, 'windowbuttonmotionfcn', {@buttonmotion,S});
             % Calculate the current point w.r.t. the axes.
             kappa =  S.xlim(1) + (F(1)-S.axpos(1)).*(S.dx/S.axpos(3));
             k =  S.xlim(1) + (F(2)-S.axpos(2)).*(S.dy/S.axpos(4));
-%             init_kap = getappdata(S, 'kappa');
-%             init_k = getappdata(S, 'k');
-%             disp(init_kap);
-%             disp(init_k);
-%             disp(S.kappa);
-%             disp(S.k);
-%             disp(kappa);
-%             disp(k);
-%             if ((S.kappa - kappa < kappa_tol) || (S.k - k < k_tol))
-                animscattwave(type, n0, n1, n2, a, k, kappa, t);
-%                 disp('will animate');
-%             else
-%                 disp('will redo resonance plot');
-%                 if (S.kappa < kappa)
-%                     kappa_range = [S.kappa, kappa];
-%                 else
-%                     kappa_range = [kappa, S.kappa];
-%                 end
-%                 
-%                 if (S.k < k)
-%                     k_range = [S.k, k];
-%                 else
-%                     k_range = [k, S.k];
-%                 end
-%                 
-%                 resplot3layer(type, n0, n1, n2, a, kappa_range(1),...
-%                               kappa_range(2), k_range(1), k_range(2));
-%             end
+            animscattwave(type, n0, n1, n2, a, k, kappa, t);
         end
     end
 
@@ -133,5 +91,4 @@ set(S.fh, 'windowbuttonmotionfcn', {@buttonmotion,S});
             set(S.tx(2),'str',num2str([kappa, k],3))
         end
     end
-% disp('at the end');
 end

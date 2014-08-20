@@ -1,13 +1,13 @@
 function exploreModes(type, n0, n1, n2, a, kappa_max, k_max)
-% exploreModes - creates a plot of 
+% exploreModes - plots resonances of three-layer waveguide
 %
-% type - te or tm
-% n0 - 
-% n1 - 
-% n2 - 
-% a - 
-% kappa_max - max value of kappa to plot
-% k_max - max value of k to plot
+% type - Transverse electric (TE) or transverse magnetic (TM)
+% n0 - Refractive index of first layer
+% n1 - Refractive index of second layer
+% n2 - Refractive index of third layer
+% a - Thickness of second layer
+% kappa_max - Maximum value of kappa (wavenumber in x direction) to plot
+% k_max - Maximum value of k (overall wavenumber) to plot
 %
 % Conley September 2013
 
