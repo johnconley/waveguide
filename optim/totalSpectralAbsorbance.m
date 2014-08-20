@@ -16,8 +16,8 @@ function a = totalSpectralAbsorbance(m, mirror, ix, ds, ns)
 % http://en.wikipedia.org/wiki/Transparent_conducting_film
 d_ITO = .1;
 n_ITO = 2+.06i;
-ds = [d_ITO, ds, d_ITO];
-ns = [n_ITO, ns(1:end-1), n_ITO, ns(end)];
+ds = [ds(1:ix-1), d_ITO, ds(ix), d_ITO, ds(ix+1:end)];
+ns = [ns(1:ix-1), n_ITO, ns(ix), n_ITO, ns(ix+1:end)];
 
 te = 'te';
 tm = 'tm';

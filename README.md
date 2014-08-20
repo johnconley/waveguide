@@ -12,4 +12,4 @@ waveguide across angle and frequency of incident light, and to explore how the w
 travel through the waveguide. `threelayergui` is the entry point to the application.
 Try `threelayergui('te',3.5,1,3.5,1,0,10,0,10)` and click on the bright lines in
 the upper half to see light waves moving through the waveguide, just like this:
-![Alt text](./wave.png)
+![](./wave.png)
