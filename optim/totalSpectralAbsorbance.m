@@ -10,8 +10,6 @@ function a = totalSpectralAbsorbance(m, mirror, ix, ds, ns)
 % ds(k) - thickness of layer k
 % ns(k) - refractive index of layer k
 
-% verify number of layers with m?
-
 % conductive oxide layers (indium tin oxide, or ITO)
 % see http://spie.org/x91028.xml?ArticleID=x91028,
 % http://refractiveindex.info/legacy/?group=CRYSTALS&material=ITO,
@@ -38,8 +36,6 @@ b = 1; %1.7726; % max wavelength in microns (chosen so that E >= .7 eV per photo
 lambdas = ((b-a)*lambdas + (b+a)) / 2;
 weights = (b-a)*weights / 2;
 
-% as=0*lambdas; ps = as;
-
 for j = 1:numNodes
     w = weights(j);
     lambda = lambdas(j);
@@ -47,24 +43,21 @@ for j = 1:numNodes
 
     % photons/m^2/s/micron, calculated by irradiance * 1/E = 1/(hc/l)
     photons = irradiance*(lambda*1e-6/hc);
-    ps(j) = photons;
     
     if (lambda < 1.7726) % cutoff of .7 eV to kick up electron
         ns(ix+1) = f(lambda); % refractive index of active layer (silicon) at lambda
         k = 2*pi/lambda;
         kappa = 0; % normal incidence
         
-        [teAbsorbance, ~] = multilayerSolver(te, mirror, k, kappa, ds, ns);
-        [tmAbsorbance, ~] = multilayerSolver(tm, mirror, k, kappa, ds, ns);
+        [teAbsorbance, ~] = solveMultilayer(te, mirror, k, kappa, ds, ns);
+        [tmAbsorbance, ~] = solveMultilayer(tm, mirror, k, kappa, ds, ns);
         absorbance = (teAbsorbance + tmAbsorbance)/2;
-        as(j) = absorbance;
         
         incomingPhotons = incomingPhotons + photons * w;
         photonsAbsorbed = photonsAbsorbed + (absorbance * photons) * w;
     end
 end
 
-% plot(lambdas,as,'.-',lambdas,ps/6e21,'r.-');
 a = (photonsAbsorbed+1)/incomingPhotons; % +1 => nonzero
 
 end

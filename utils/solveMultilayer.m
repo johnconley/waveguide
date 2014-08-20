@@ -1,5 +1,5 @@
-function [absorbance, coeffs] = multilayerSolver(polarization, mirror, k, kappa, ds, ns)
-% multilayerSolver - computes the absorbance and wave equation
+function [absorbance, coeffs] = solveMultilayer(polarization, mirror, k, kappa, ds, ns)
+% solveMultilayer - computes the absorbance and wave equation
 % coefficients for an arbitrary layer waveguide
 %
 % polarization - 'te' for transverse electric and 'tm' for transverse
