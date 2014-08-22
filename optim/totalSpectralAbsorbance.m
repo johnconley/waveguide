@@ -10,6 +10,10 @@ function a = totalSpectralAbsorbance(m, mirror, ix, ds, ns)
 % ds(k) - thickness of layer k
 % ns(k) - refractive index of layer k
 
+parentDir = fileparts(pwd());
+addpath(strcat(parentDir,'/utils'));
+addpath(strcat(parentDir,'/data'));
+
 % conductive oxide layers (indium tin oxide, or ITO)
 % see http://spie.org/x91028.xml?ArticleID=x91028,
 % http://refractiveindex.info/legacy/?group=CRYSTALS&material=ITO,
