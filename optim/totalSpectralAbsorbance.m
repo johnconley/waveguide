@@ -17,10 +17,7 @@ parentDir = fileparts(pwd());
 addpath(strcat(parentDir,'/utils'));
 addpath(strcat(parentDir,'/data'));
 
-% conductive oxide layers (indium tin oxide, or ITO)
-% see http://spie.org/x91028.xml?ArticleID=x91028,
-% http://refractiveindex.info/legacy/?group=CRYSTALS&material=ITO,
-% http://en.wikipedia.org/wiki/Transparent_conducting_film
+% conductive oxide layers (indium tin oxide)
 d_ITO = .1;
 n_ITO = 2+.06i;
 ds = [ds(1:ix-1), d_ITO, ds(ix), d_ITO, ds(ix+1:end)];
@@ -39,7 +36,7 @@ photonsAbsorbed = 0;
 numNodes = 250;
 [lambdas, weights] = quadr.gauss(numNodes);
 a = .25; % min wavelength in microns
-b = 1; %1.7726; % max wavelength in microns (chosen so that E >= .7 eV per photon)
+b = 1;
 lambdas = ((b-a)*lambdas + (b+a)) / 2;
 weights = (b-a)*weights / 2;
 

@@ -29,6 +29,4 @@ refIxFnc = spline(lambdas, y);
     end
 
 f = @(lambda) fun(refIxFnc, lambda);
-
-% f = @(lambda) ppval(refIxFnc, lambda); % takes wavelength in microns, returns complex n
 end

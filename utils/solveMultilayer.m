@@ -16,10 +16,6 @@ function [absorbance, coeffs] = solveMultilayer(polarization, mirror, k, kappa, 
 %
 % Conley April 2014
 
-
-% check input: k != 0, length(ns) = length(ds)+1, ds(j) > 0,
-% ns(j) != 0 (except for last one), at least one layer, kappa < k (?)
-
 i = 1i;
 m = length(ds); % number of layers (excluding freespace and final infinite layer)
 size = 2*m + 2;
@@ -30,8 +26,6 @@ else
     tm = false;
 end
 
-% change ds so that ds(j) is distance from j-(j+1) boundary to
-% freespace-waveguide boundary
 for j=2:m
     ds(j) = ds(j-1) + ds(j);
 end
@@ -65,7 +59,6 @@ if m == 0 % correct for 0-layer (1 interface)
     A = A(:,1:2);
 end
 
-% what happens if kappa roughly equals n*k?
 for layer = 1:m
     r = 2*layer + 1; % row index
     c = 2*layer; % column index
@@ -90,7 +83,6 @@ for layer = 1:m
         A(r+1,c+3) = i*aa*exp(-i*aa*d);
     end
     
-    % won't work if mirror
     if tm
         A(r+1,c) = A(r+1,c)/n^2;
         A(r+1,c+1) = A(r+1,c+1)/n^2;
