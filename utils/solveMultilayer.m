@@ -11,6 +11,9 @@ function [absorbance, coeffs] = solveMultilayer(polarization, mirror, k, kappa, 
 % ns - ns(j) = complex refractive index of layer j (must have one more
 % index than ds to give refractive index of final layer if not mirror)
 %
+% example:
+% [a, coeffs] = multilayer_solver('tm',false,12,0,5,[4.27+6i,1])
+%
 % Conley April 2014
 
 

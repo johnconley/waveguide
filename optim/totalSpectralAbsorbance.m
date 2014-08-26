@@ -9,6 +9,9 @@ function a = totalSpectralAbsorbance(m, mirror, ix, ds, ns)
 % ix - 1 <= ix <= m is the index of the active layer
 % ds(k) - thickness of layer k
 % ns(k) - refractive index of layer k
+%
+% example:
+% a = totalSpectralAbsorbance(3,false,3,[1,.7,.15],[1.5,2,3,1])
 
 parentDir = fileparts(pwd());
 addpath(strcat(parentDir,'/utils'));

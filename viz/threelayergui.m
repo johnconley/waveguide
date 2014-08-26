@@ -1,8 +1,7 @@
 function threelayergui(type, n0, n1, n2, a, kappa_min, kappa_max, k_min, k_max)
-% threelayergui Brief description of GUI.
-%       Comments displayed at the command line in response 
-%       to the help command. 
-
+% example:
+% threelayergui('te',3.5,1,3.5,1,0,10,0,10)
+%
 % Conley November 2013
 % Code modeled off 
 % http://www.mathworks.com/matlabcentral/fileexchange/24861-41-complete-gui-examples/content/GUI_27.m

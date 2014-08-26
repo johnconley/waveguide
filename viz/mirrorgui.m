@@ -1,8 +1,7 @@
-function mirrorlayergui(type, n0, n1, n2, d1, d2, kappa_max, k_max)
-% mirrorlayergui Brief description of GUI.
-%       Comments displayed at the command line in response 
-%       to the help command. 
-
+function mirrorgui(type, n0, n1, n2, d1, d2, kappa_max, k_max)
+% example:
+% mirrorgui('te',1,sqrt(12.5),sqrt(2.5)+.3i,2,2.5,10,10)
+%
 % Conley November 2013
 % Code modeled off 
 % http://www.mathworks.com/matlabcentral/fileexchange/24861-41-complete-gui-examples/content/GUI_27.m

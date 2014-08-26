@@ -9,6 +9,9 @@ function exploreModes(type, n0, n1, n2, a, kappa_max, k_max)
 % kappa_max - Maximum value of kappa (wavenumber in x direction) to plot
 % k_max - Maximum value of k (overall wavenumber) to plot
 %
+% example:
+% exploreModes('te',1,2,1,1.4,10,10)
+%
 % Conley September 2013
 
 num_k = 500;
