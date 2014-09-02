@@ -10,9 +10,9 @@ mirror = false;
 ix = 1;
 ns = [1,1];
 
-% fmincon finds minimum, so to find max of multilayerWrapper we find min
+% fmincon finds minimum, so to find max of totalSpectralAbsorbance we find min
 % of inverse
-% f = @(ds) 1/multilayerWrapper(m, mirror, ix, ds, ns);
+% f = @(ds) 1/totalSpectralAbsorbance(m, mirror, ix, ds, ns);
 
 % min = .1;
 % max = 5;
@@ -27,7 +27,7 @@ ns = [1,1];
 m=2;
 mirror = true;
 ix = 2;
-f = @(params) 1/multilayerWrapper(m, mirror, ix, params(1:m), params(m+1:end));
+f = @(params) 1/totalSpectralAbsorbance(m, mirror, ix, params(1:m), params(m+1:end));
 [xb,fb,flag,outp]=fmincon(f,[0.1574,0.005,3.2776,1,1],[],[],[],[],[.001,.001,1,1,1],[5,5,5,1,5],[],optimset('display','iter'))
 % initial vector [1,1,1,1,1] outputs [.3923,1.4449,3.0769,1,1] (a=.3489)
 % initial vector [1,.05,1,1,1] outputs NaN
