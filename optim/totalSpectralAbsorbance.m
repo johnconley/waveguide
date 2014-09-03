@@ -6,6 +6,7 @@ function a = totalSpectralAbsorbance(m, mirror, ix, ds, ns)
 % m - number of layers in waveguide (excluding freespace, two conductive
 % oxide layers, and final layer, which is either a mirror or infinite
 % thickness)
+% mirror - true if layer n+1 is a perfect mirror, false otherwise
 % ix - 1 <= ix <= m is the index of the active layer
 % ds(k) - thickness of layer k
 % ns(k) - refractive index of layer k
